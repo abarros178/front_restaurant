@@ -2,19 +2,28 @@ import { createTheme } from '@mui/material/styles';
 
 const AppTheme = createTheme({
   palette: {
-    mode: 'light', // Puedes cambiarlo a 'dark' si prefieres un tema oscuro
+    mode: 'light',
     primary: {
-      main: '#000000', // Cambia el color principal
+      main: '#1976d2', // Un azul más suave y profesional
+      light: '#42a5f5',
+      dark: '#1565c0',
     },
     secondary: {
-      main: '#86b681', // Cambia el color secundario
+      main: '#388e3c', // Un verde más sutil para el acento
+      light: '#4caf50',
+      dark: '#2e7d32',
     },
     background: {
-      default: '#86b681', // Color de fondo por defecto
+      default: '#f5f5f5', // Un gris muy claro para el fondo
+      paper: '#ffffff',
+    },
+    text: {
+      primary: '#333333',
+      secondary: '#666666',
     },
   },
   typography: {
-    fontFamily: `'Roboto', 'Helvetica', 'Arial', sans-serif`, // Cambia la tipografía si lo deseas
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
     h1: {
       fontSize: '2.5rem',
       fontWeight: 500,
@@ -24,7 +33,31 @@ const AppTheme = createTheme({
       fontWeight: 400,
     },
     button: {
-      textTransform: 'none', // Evita que el texto de los botones esté en mayúsculas
+      textTransform: 'none',
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: 12,
+          boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+        },
+      },
+    },
+    MuiDrawer: {
+      styleOverrides: {
+        paper: {
+          backgroundColor: '#ffffff',
+        },
+      },
     },
   },
 });

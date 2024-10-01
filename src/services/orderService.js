@@ -13,3 +13,28 @@ export const getLatestOrderCount = async () => {
     throw error; // Propagate the error to be handled in the component
   }
 };
+
+export const getOrders = async (page = 1, limit = 10, sortBy = 'created_at', sortOrder = 'desc') => {
+  const api = createApiInstance(BASE_URL); // Create a new instance with the base URL
+
+  try {
+    const response = await api.get(`/orders`, {
+      params: { page, limit, sortBy, sortOrder }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+    throw error;
+  }
+};
+
+export const getOrderDetails = async (orderId) => {
+  const api = createApiInstance(BASE_URL); // Create a new instance with the base URL
+  try {
+    const response = await api.get(`/orders/${orderId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching order details:', error);
+    throw error;
+  }
+};
