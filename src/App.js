@@ -6,18 +6,19 @@ import Orders from './pages/Orders';
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import AppTheme from './theme'; // Importa el archivo de tema que creamos
+import { SocketProvider } from './context/SocketContext'; // Import the SocketProvider
 
 function App() {
   return (
     <ThemeProvider theme={AppTheme}>
-    <CssBaseline /> {/* Esto asegura que el estilo básico del navegador sea eliminado */}
-    <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/orders" element={<Orders />} />
-      </Routes>
-    </Router>
+      <CssBaseline /> {/* Esto asegura que el estilo básico del navegador sea eliminado */}
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<SocketProvider><Home /></SocketProvider>} /> {/* Wrap only Home with SocketProvider */}
+          <Route path="/orders" element={<Orders />} />
+        </Routes>
+      </Router>
     </ThemeProvider>
   );
 }
