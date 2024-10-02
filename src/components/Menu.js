@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Drawer,
   List,
@@ -50,9 +50,18 @@ const Menu = () => {
   const [open, setOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [username, setUsername] = useState(''); // Nuevo estado para el username
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const navigate = useNavigate();
+
+  // Recuperar el username desde localStorage cuando el componente se monte
+  useEffect(() => {
+    const storedUsername = localStorage.getItem('username');
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
 
   const handleListItemClick = (event, index, route) => {
     setSelectedIndex(index);
@@ -73,10 +82,10 @@ const Menu = () => {
     setIsLoggingOut(true);
     try {
       await logoutUser();
+      localStorage.removeItem('username');  // Limpiar el username de localStorage al cerrar sesión
       navigate('/');
     } catch (error) {
       console.error('Logout failed:', error);
-      // Aquí podrías mostrar un mensaje de error al usuario
     } finally {
       setIsLoggingOut(false);
     }
@@ -94,9 +103,9 @@ const Menu = () => {
     <Box display="flex" flexDirection="column" height="100%">
       <Box sx={{ marginBottom: 2, display: 'flex', alignItems: 'center', padding: 2, justifyContent: 'space-between' }}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Avatar sx={{ marginRight: 2 }}>A</Avatar>
+          <Avatar sx={{ marginRight: 2 }}>{username.charAt(0).toUpperCase()}</Avatar> {/* Mostrar la inicial del username */}
           <Typography variant="h6" fontWeight="bold">
-            Hello, Andres
+            Hello, {username || 'Guest'} {/* Mostrar el username recuperado */}
           </Typography>
         </Box>
         {isMobile && (
