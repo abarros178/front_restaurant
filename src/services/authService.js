@@ -14,9 +14,10 @@ export const loginUser = async (email, password) => {
       throw new Error('No token returned from login');
     }
 
-    const { token } = response.data;  // El token está en response.data.token
+    const { token,username } = response.data;  // El token está en response.data.token
     // Guarda el token en localStorage
     localStorage.setItem('token', token);
+    localStorage.setItem('username', username);
     return token;
   } catch (error) {
     // Aquí se utiliza el manejo de errores ya configurado en el interceptor
