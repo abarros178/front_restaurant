@@ -46,10 +46,8 @@ const Home = () => {
           sx={{
             width: { xs: '100%', sm: '250px' },
             flexShrink: 0,
-            backgroundColor: 'background.paper',
             borderRight: '1px solid',
             borderColor: 'divider',
-            boxShadow: 2,
           }}
         >
           <Menu />
@@ -76,7 +74,7 @@ const Home = () => {
                 fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
               }}
             >
-              ¡Bienvenido a la Cocina del Restaurante!
+              Welcome to the Restaurant Kitchen!
             </Typography>
 
             <Typography 

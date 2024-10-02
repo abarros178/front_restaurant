@@ -67,7 +67,7 @@ const CreateOrder = () => {
             color: theme.palette.primary.main,
           }}
         >
-          Orden #{orderCount}
+          Order #{orderCount}
         </Typography>
         <Typography 
           variant="body1" 
@@ -77,7 +77,7 @@ const CreateOrder = () => {
             marginBottom: '1rem',
           }}
         >
-          Estás por ingresar la orden <strong>#{orderCount}</strong>. Una vez confirmada, el plato será preparado y podrás seguir su progreso a través de los diferentes estados en el detalle de la orden.
+         You are about to place order <strong>#{orderCount}</strong>. Once confirmed, the dish will be prepared, and you will be able to track its progress through the different statuses in the order details.
         </Typography>
         
         <Button 

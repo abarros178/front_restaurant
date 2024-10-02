@@ -9,6 +9,9 @@ import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import AppTheme from './theme'; // Importa el archivo de tema que creamos
 import { SocketProvider } from './context/SocketContext'; // Import the SocketProvider
+import PurchaseHistory from './pages/PurchaseHistory';
+import RecipePage from './pages/Recipes';
+import KitchenInventory  from './pages/KitchenInventory';
 
 function App() {
   return (
@@ -21,6 +24,9 @@ function App() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/ordersDetail/:orderId" element={<OrderDetailPage />} />
           <Route path="/ordersHistory" element={<OrderHistoryPage />} />
+          <Route path="/purchaseHistory" element={<PurchaseHistory/>} />
+          <Route path="/recipes" element={<RecipePage/>} />
+          <Route path="/KitchenInventory" element={<KitchenInventory/>} />
         </Routes>
       </Router>
     </ThemeProvider>

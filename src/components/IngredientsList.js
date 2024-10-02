@@ -36,7 +36,7 @@ const IngredientsList = ({ ingredients }) => (
       <Box display="flex" alignItems="center" mb={2}>
         <KitchenIcon color="primary" fontSize="large" sx={{ mr: 2 }} />
         <Typography variant="h5" component="div" gutterBottom>
-          Ingredientes
+        Ingredients
         </Typography>
       </Box>
       <List disablePadding>

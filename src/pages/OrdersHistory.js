@@ -67,21 +67,17 @@ const OrderHistoryPage = () => {
 
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: '#f5f5f5' }}>
-      <Box
-        component="nav"
-        sx={{
-          width: 240,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: 240,
-            boxSizing: 'border-box',
-            position: 'relative',
-            height: '100vh',
-          },
-        }}
-      >
-        <Menu />
-      </Box>
+        <Box
+          component="nav"
+          sx={{
+            width: { xs: '100%', sm: '250px' },
+            flexShrink: 0,
+            borderRight: '1px solid',
+            borderColor: 'divider',
+          }}
+        >
+          <Menu />
+        </Box>
       <Box
         component="main"
         sx={{

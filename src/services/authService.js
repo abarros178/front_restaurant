@@ -24,12 +24,23 @@ export const loginUser = async (email, password) => {
   }
 };
 
-// Función para cerrar sesión
-export const logoutUser = () => {
-  localStorage.removeItem('token');  // Eliminar el token del localStorage
+export const logoutUser = async () => {
+  const api = createApiInstance(BASE_URL);
+  try {
+    const token = localStorage.getItem('token');
+    if (token) {
+      await api.post('/logout', { token });
+    }
+  } catch (error) {
+    console.error('Error during logout:', error);
+    // Incluso si hay un error, procedemos con la limpieza local
+  } finally {
+    // Limpiamos el token y cualquier otro dato de sesión
+    localStorage.removeItem('token');
+    // Aquí podrías limpiar otros datos de sesión si los tienes
+  }
 };
 
-// Función para obtener el token desde localStorage
 export const getToken = () => {
   return localStorage.getItem('token');
 };

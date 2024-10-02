@@ -14,6 +14,7 @@ import {
   useTheme,
   Avatar,
   Tooltip,
+  CircularProgress
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -24,9 +25,12 @@ import ReceiptIcon from '@mui/icons-material/Receipt';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import CloseIcon from '@mui/icons-material/Close';
+import { useNavigate } from 'react-router-dom';
+import { logoutUser } from '../services/authService';
 
 const StyledListItem = styled(ListItem)(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
+  cursor: 'pointer',
   '&:hover': {
     backgroundColor: theme.palette.action.hover,
   },
@@ -45,11 +49,17 @@ const StyledListItem = styled(ListItem)(({ theme }) => ({
 const Menu = () => {
   const [open, setOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const navigate = useNavigate();
 
-  const handleListItemClick = (event, index) => {
+  const handleListItemClick = (event, index, route) => {
     setSelectedIndex(index);
+    navigate(route);
+    if (isMobile) {
+      setOpen(false);
+    }
   };
 
   const toggleDrawer = (open) => (event) => {
@@ -59,12 +69,25 @@ const Menu = () => {
     setOpen(open);
   };
 
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    try {
+      await logoutUser();
+      navigate('/');
+    } catch (error) {
+      console.error('Logout failed:', error);
+      // Aquí podrías mostrar un mensaje de error al usuario
+    } finally {
+      setIsLoggingOut(false);
+    }
+  };
+
   const menuItems = [
-    { text: 'Home', icon: <HomeIcon /> },
-    { text: 'Order History', icon: <HistoryIcon /> },
-    { text: 'Ingredients', icon: <LocalGroceryStoreIcon /> },
-    { text: 'Recipe', icon: <ReceiptIcon /> },
-    { text: 'Purchase History', icon: <ShoppingCartIcon /> },
+    { text: 'Home', icon: <HomeIcon />, route: '/home' },
+    { text: 'Order History', icon: <HistoryIcon />, route: '/ordersHistory' },
+    { text: 'Ingredients', icon: <LocalGroceryStoreIcon />, route: '/KitchenInventory' },
+    { text: 'Recipe', icon: <ReceiptIcon />, route: '/recipes' },
+    { text: 'Purchase History', icon: <ShoppingCartIcon />, route: '/purchaseHistory' },
   ];
 
   const MenuContent = (
@@ -89,7 +112,7 @@ const Menu = () => {
             button
             key={item.text}
             selected={selectedIndex === index}
-            onClick={(event) => handleListItemClick(event, index)}
+            onClick={(event) => handleListItemClick(event, index, item.route)}
           >
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.text} />
@@ -102,10 +125,12 @@ const Menu = () => {
           variant="contained"
           color="secondary"
           fullWidth
-          startIcon={<ExitToAppIcon />}
+          startIcon={isLoggingOut ? <CircularProgress size={20} color="inherit" /> : <ExitToAppIcon />}
           sx={{ borderRadius: '8px' }}
+          onClick={handleLogout}
+          disabled={isLoggingOut}
         >
-          Log Out
+          {isLoggingOut ? 'Logging out...' : 'Log Out'}
         </Button>
       </Box>
     </Box>

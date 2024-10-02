@@ -27,7 +27,7 @@ const DishDetails = ({ orderId, dish }) => (
       <Box display="flex" alignItems="center" mb={2}>
         <RestaurantMenuIcon color="primary" fontSize="large" sx={{ mr: 2 }} />
         <Typography variant="h5" component="div" gutterBottom>
-          Plato de orden #{orderId}
+        Order plate #{orderId}
         </Typography>
       </Box>
       <Typography variant="h6" color="primary" gutterBottom>
@@ -38,7 +38,7 @@ const DishDetails = ({ orderId, dish }) => (
       </Typography>
       <Chip
         icon={<KitchenIcon />}
-        label="Preparación: 15 minutos"
+        label="Preparation time: 15 minutes"
         color="primary"
         variant="outlined"
       />

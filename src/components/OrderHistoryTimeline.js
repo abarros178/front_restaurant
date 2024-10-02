@@ -26,19 +26,18 @@ const getIconForAction = (action) => {
       default:
         return <Error color="error" />;
     }
-  };
+};
 
 const OrderHistoryTimeline = ({ history }) => (
     <Paper elevation={2} sx={{ p: 2, borderRadius: '8px', mb: 3 }}>
         <Typography variant="h6" gutterBottom color="primary">
-            Historial Detallado de la Orden
+            Order Detailed History
         </Typography>
         <List>
             {history.map((event, index) => (
                 <React.Fragment key={index}>
                     <ListItem alignItems="flex-start">
                         <ListItemIcon>
-
                             {getIconForAction(event.action)}
                         </ListItemIcon>
                         <ListItemText

@@ -8,7 +8,7 @@ const OrderList = () => {
   return (
     <Box>
       <Typography variant="h6" gutterBottom>
-        Listado de órdenes
+        Order List
       </Typography>
       
       {/* Fade Component for smooth transition */}
@@ -18,9 +18,9 @@ const OrderList = () => {
             <TableHead>
               <TableRow>
                 <TableCell align="center"><strong>ID</strong></TableCell>
-                <TableCell align="center"><strong>Nombre de la receta</strong></TableCell>
-                <TableCell align="center"><strong>Estado</strong></TableCell>
-                <TableCell align="center"><strong>Fecha y Hora</strong></TableCell>
+                <TableCell align="center"><strong>Recipe Name</strong></TableCell>
+                <TableCell align="center"><strong>Status</strong></TableCell>
+                <TableCell align="center"><strong>Date and Time</strong></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

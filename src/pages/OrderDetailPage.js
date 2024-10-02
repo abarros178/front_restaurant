@@ -8,7 +8,7 @@ import OrderHistory from '../components/OrderHistory';
 import DishDetails from '../components/DishDetails';
 import IngredientsList from '../components/IngredientsList';
 import OrderHistoryTimeline from '../components/OrderHistoryTimeline';
-import { getOrderDetails } from '../services/orderService'; // Asegúrate de crear este servicio
+import { getOrderDetails } from '../services/orderService'; // Make sure to create this service
 
 const OrderDetailPage = () => {
     const [orderDetails, setOrderDetails] = useState(null);
@@ -16,7 +16,7 @@ const OrderDetailPage = () => {
     const [error, setError] = useState(null);
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-    const { orderId } = useParams(); // Asumiendo que usas react-router y el ID está en la URL
+    const { orderId } = useParams(); // Assuming you use react-router and the ID is in the URL
 
     useEffect(() => {
         const fetchOrderDetails = async () => {
@@ -27,7 +27,7 @@ const OrderDetailPage = () => {
                 setError(null);
             } catch (err) {
                 console.error('Error fetching order details:', err);
-                setError('No se pudo cargar los detalles de la orden. Por favor, intenta de nuevo.');
+                setError('Could not load order details. Please try again.');
             } finally {
                 setLoading(false);
             }
@@ -49,15 +49,15 @@ const OrderDetailPage = () => {
     }
 
     if (!orderDetails) {
-        return <Typography>No se encontraron detalles para esta orden.</Typography>;
+        return <Typography>No details found for this order.</Typography>;
     }
 
     const steps = [
-        { label: 'Entered', description: 'La orden ha sido registrada y pronto comenzará su preparación' },
-        { label: 'Insufficient', description: 'Ingredientes insuficientes, esperando más suministros' },
-        { label: 'Purchase In Progress', description: 'Comprando ingredientes adicionales' },
-        { label: 'Preparation', description: 'El chef está cocinando el plato' },
-        { label: 'Completed', description: 'La orden ha sido completada y está lista para ser entregada' },
+        { label: 'Entered', description: 'The order has been recorded and will soon begin preparation.' },
+        { label: 'Insufficient', description: 'Insufficient ingredients, waiting for more supplies.' },
+        { label: 'Purchase In Progress', description: 'Buying additional ingredients.' },
+        { label: 'Preparation', description: 'The chef is cooking the dish.' },
+        { label: 'Completed', description: 'The order has been completed and is ready for delivery.' },
     ];
 
     const statusToStepIndex = {
@@ -70,18 +70,18 @@ const OrderDetailPage = () => {
 
     const activeStep = statusToStepIndex[orderDetails.status_code] || 0;
 
-    // Adaptación de los datos recibidos al formato esperado por los componentes
+    // Adaptation of the received data to the expected format by the components
     const adaptedOrderDetails = {
         ...orderDetails,
         dish: {
-            name: orderDetails.recipes_name, // Esto debería venir de la API
+            name: orderDetails.recipes_name, // This should come from the API
             description: orderDetails.description,
             ingredients: orderDetails.ingredients
         },
         history: orderDetails.history.map(event => ({
             action: event.status_name,
             timestamp: event.change_timestamp,
-            details: event.source // Puedes ajustar esto según la información que quieras mostrar
+            details: event.source // You can adjust this according to the information you want to display
         }))
     };
 
