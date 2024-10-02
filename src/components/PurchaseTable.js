@@ -43,7 +43,6 @@ const PurchaseTable = ({
 
   // Maneja el orden al hacer clic en el encabezado de la columna
   const handleRequestSort = (property) => {
-    const isAsc = orderBy === property && order === 'asc';
     const apiProperty = apiColumnMapping[property] || property; // Convierte a nombre de la API
     onRequestSort(apiProperty); // Envío el nombre de la API en lugar del mostrado
   };

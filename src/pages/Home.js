@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import {  createTheme } from '@mui/material/styles';
 import { Typography, Container, Box, Paper, useMediaQuery } from '@mui/material';
 import Menu from '../components/Menu';
 import CreateOrder from '../components/CreateOrder';
@@ -31,7 +31,7 @@ const theme = createTheme({
 });
 
 const Home = () => {
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
       <Box sx={{ 

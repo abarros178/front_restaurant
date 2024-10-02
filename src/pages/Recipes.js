@@ -3,13 +3,10 @@ import {
   Box,
   Typography,
   useTheme,
-  TextField,
-  InputAdornment,
   Paper,
   Container,
   Fade,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import Menu from "../components/Menu";
 import { getRecipes } from "../services/recipeService";
@@ -17,7 +14,7 @@ import RecipeList from "../components/RecipeList";
 
 const RecipePage = () => {
   const [recipes, setRecipes] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm] = useState("");
   const theme = useTheme();
 
   useEffect(() => {

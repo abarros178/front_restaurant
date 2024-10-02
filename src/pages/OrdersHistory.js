@@ -9,7 +9,7 @@ import { getOrders } from '../services/orderService';
 const OrderHistoryPage = () => {
   const [orders, setOrders] = useState([]);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [orderBy, setOrderBy] = useState('created_at');
   const [order, setOrder] = useState('desc');
   const [searchTerm, setSearchTerm] = useState('');
@@ -17,19 +17,18 @@ const OrderHistoryPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const data = await getOrders(page + 1, rowsPerPage, orderBy, order, searchTerm);
+        setOrders(data.orders);
+        setTotalItems(data.totalItems);
+      } catch (error) {
+        console.error('Error fetching orders:', error);
+      }
+    };
+  
     fetchOrders();
   }, [page, rowsPerPage, orderBy, order, searchTerm]);
-
-  const fetchOrders = async () => {
-    try {
-      const data = await getOrders(page + 1, rowsPerPage, orderBy, order, searchTerm);
-      setOrders(data.orders);
-      setTotalItems(data.totalItems);
-    } catch (error) {
-      console.error('Error fetching orders:', error);
-      // Manejar el error (e.g., mostrar un mensaje al usuario)
-    }
-  };
 
   const handleRequestSort = (property) => {
     const isAsc = orderBy === property && order === 'asc';

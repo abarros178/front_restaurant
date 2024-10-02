@@ -15,7 +15,7 @@ const OrderDetailPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    useMediaQuery(theme.breakpoints.down('sm'));
     const { orderId } = useParams(); // Assuming you use react-router and the ID is in the URL
 
     useEffect(() => {
