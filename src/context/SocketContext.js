@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
+import { SOCKET_URL, SOCKET_PATH } from '../config'; // Asegúrate de ajustar la ruta según tu estructura de archivos
 
 const SocketContext = createContext();
 
@@ -8,7 +9,10 @@ export const SocketProvider = ({ children }) => {
   const [latestOrders, setLatestOrders] = useState([]);
 
   useEffect(() => {
-    const newSocket = io('http://localhost:3010'); // Reemplaza con la URL de tu servidor
+    const newSocket = io(SOCKET_URL, {
+      path: SOCKET_PATH,
+      transports: ["websocket", "polling"]
+    });
 
     // Guardar el socket en el estado
     setSocket(newSocket);

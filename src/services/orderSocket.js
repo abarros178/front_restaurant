@@ -1,6 +1,6 @@
 import createApiInstance from './api'; // Adjust the path if needed
 
-const api = createApiInstance('http://localhost:3010/api'); // Adjust the base URL as necessary
+const api = createApiInstance('http://35.226.163.33/order-socket/api'); // Adjust the base URL as necessary
 
 export const fetchLatestOrders = async () => {
   try {

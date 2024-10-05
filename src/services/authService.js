@@ -1,11 +1,10 @@
 import createApiInstance from './api'; // Importa la función para crear la instancia de Axios
+import { API_BASE_URL_AUTH } from '../config';
 
-// Definir la variable para la base URL
-const BASE_URL = 'http://localhost:3003/auth-service/api'; // Cambia esto según tu entorno
 
 // Función para iniciar sesión y obtener el token
 export const loginUser = async (email, password) => {
-  const api = createApiInstance(BASE_URL); // Crear una instancia de Axios con la URL base definida
+  const api = createApiInstance(API_BASE_URL_AUTH); // Crear una instancia de Axios con la URL base definida
   try {
     const response = await api.post('/login', { email, password });  // Llama a la API de login
 
@@ -26,7 +25,7 @@ export const loginUser = async (email, password) => {
 };
 
 export const logoutUser = async () => {
-  const api = createApiInstance(BASE_URL);
+  const api = createApiInstance(API_BASE_URL_AUTH);
   try {
     const token = localStorage.getItem('token');
     if (token) {

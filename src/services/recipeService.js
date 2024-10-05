@@ -1,12 +1,11 @@
 import createApiInstance from './api';
+import { API_BASE_URL_KITCHEN } from '../config';
 
-const API_URL = 'http://localhost:3004/api/kitchen';
 
 export const getRecipes = async () => {
-  const api = createApiInstance(API_URL);
-
+  const api = createApiInstance(API_BASE_URL_KITCHEN);
   try {
-    const response = await api.get(`${API_URL}/all`);
+    const response = await api.get(`/all`);
     return response.data;
   } catch (error) {
     console.error('Error fetching recipes:', error);

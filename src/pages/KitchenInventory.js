@@ -12,6 +12,7 @@ import {
   Chip,
   useTheme,
   alpha,
+  useMediaQuery,
 } from "@mui/material";
 import { Kitchen as KitchenIcon } from "@mui/icons-material";
 import Menu from "../components/Menu";
@@ -20,6 +21,7 @@ import { getKitchenInventory } from "../services/inventoryService"; // Asume que
 const KitchenInventory = () => {
   const [ingredients, setIngredients] = useState([]);
   const theme = useTheme();
+  useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     const fetchInventory = async () => {
@@ -39,6 +41,7 @@ const KitchenInventory = () => {
         display: "flex",
         minHeight: "100vh",
         bgcolor: "background.default",
+        flexDirection: { xs: "column", sm: "row" }, // Cambia la dirección en pantallas pequeñas
       }}
     >
       <Box
@@ -46,8 +49,8 @@ const KitchenInventory = () => {
         sx={{
           width: { xs: "100%", sm: "250px" },
           flexShrink: 0,
-          borderRight: "1px solid",
-          borderColor: "divider",
+          borderRight: { sm: "1px solid" },
+          borderColor: { sm: "divider" },
         }}
       >
         <Menu />
@@ -67,12 +70,17 @@ const KitchenInventory = () => {
               Ingredients Available in Kitchen
             </Typography>
           </Box>
-          <TableContainer component={Paper} elevation={0}>
-            <Table sx={{ minWidth: 650 }} aria-label="inventory table">
+          <TableContainer component={Paper} elevation={0} sx={{ overflowX: "auto" }}>
+            <Table
+              sx={{
+                minWidth: { xs: 300, sm: 650 }, // Cambia el minWidth para pantallas pequeñas
+              }}
+              aria-label="inventory table"
+            >
               <TableHead>
                 <TableRow>
                   <TableCell sx={{ fontWeight: "bold", fontSize: "1.1rem" }}>
-                  Product
+                    Product
                   </TableCell>
                   <TableCell
                     align="right"
@@ -96,7 +104,7 @@ const KitchenInventory = () => {
                         label={ingredient.available_quantity}
                         color={
                           ingredient.available_quantity === 0
-                            ? "error" // Color rojo para 0
+                            ? "error"
                             : ingredient.available_quantity > 2
                             ? "success"
                             : "warning"
@@ -107,7 +115,7 @@ const KitchenInventory = () => {
                           color: "white",
                           bgcolor: (theme) =>
                             ingredient.available_quantity === 0
-                              ? alpha(theme.palette.error.main, 0.9) // Color de fondo rojo
+                              ? alpha(theme.palette.error.main, 0.9)
                               : ingredient.available_quantity > 2
                               ? alpha(theme.palette.success.main, 0.9)
                               : alpha(theme.palette.warning.main, 0.9),

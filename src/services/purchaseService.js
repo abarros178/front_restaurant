@@ -1,12 +1,12 @@
 import createApiInstance from './api';
+import { API_BASE_URL_MARKET } from '../config';
 
-const API_URL = 'http://localhost:3006/api/marketplace';
 
 export const getPurchaseHistory = async (page = 0, limit = 10, sortBy = 'purchase_date', sortOrder = 'desc', searchTerm = '') => {
-  const api = createApiInstance(API_URL);
+  const api = createApiInstance(API_BASE_URL_MARKET);
 
   try {
-    const response = await api.get(`${API_URL}/historyPurchases`, {
+    const response = await api.get(`/historyPurchases`, {
       params: { 
         page: page + 1, 
         limit, 

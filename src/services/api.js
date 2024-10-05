@@ -27,7 +27,7 @@ const createApiInstance = (baseURL) => {
     },
     (error) => {
       if (error.response) {
-        if (error.response.status === 401) {
+        if (error.response.status === 401 || error.response.status === 403) {
           localStorage.removeItem('token');
           window.location.href = '/login';
         }

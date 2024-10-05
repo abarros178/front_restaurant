@@ -1,10 +1,8 @@
 import createApiInstance from './api'; // Import the function to create the Axios instance
-
-const BASE_URL = 'http://localhost:3001/api'; // Set the base URL for your API
-
+import { API_BASE_URL_ORDER } from '../config';
 
 export const getLatestOrderCount = async () => {
-  const api = createApiInstance(BASE_URL); // Create a new instance with the base URL
+  const api = createApiInstance(API_BASE_URL_ORDER); // Create a new instance with the base URL
   try {
     const response = await api.get('/orders/latest'); // Fetch the latest order
     return response.data.id; // Return the latest order count
@@ -14,7 +12,7 @@ export const getLatestOrderCount = async () => {
 };
 
 export const getOrders = async (page = 1, limit = 10, sortBy = 'created_at', sortOrder = 'desc', searchTerm = '') => {
-  const api = createApiInstance(BASE_URL); // Crear una nueva instancia con la URL base
+  const api = createApiInstance(API_BASE_URL_ORDER); // Crear una nueva instancia con la URL base
 
   try {
     const response = await api.get(`/orders`, {
@@ -28,7 +26,7 @@ export const getOrders = async (page = 1, limit = 10, sortBy = 'created_at', sor
 };
 
 export const getOrderDetails = async (orderId) => {
-  const api = createApiInstance(BASE_URL); // Create a new instance with the base URL
+  const api = createApiInstance(API_BASE_URL_ORDER); // Create a new instance with the base URL
   try {
     const response = await api.get(`/orders/${orderId}`);
     return response.data;
