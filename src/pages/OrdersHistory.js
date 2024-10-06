@@ -21,9 +21,9 @@ const OrderHistoryPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const data = await getOrders(page + 1, rowsPerPage, orderBy, order, searchTerm);
-        setOrders(data.orders);
-        setTotalItems(data.totalItems);
+        const response = await getOrders(page + 1, rowsPerPage, orderBy, order, searchTerm);
+        setOrders(response.orders); // Accede a data.orders
+        setTotalItems(response.totalItems); // Accede a data.totalItems
       } catch (error) {
         console.error('Error fetching orders:', error);
       }
@@ -56,7 +56,7 @@ const OrderHistoryPage = () => {
     navigate(`/ordersDetail/${orderId}`);
   };
 
-  const sortedOrders = orders.sort((a, b) => {
+  orders.sort((a, b) => {
     if (order === 'asc') {
       return a[orderBy] < b[orderBy] ? -1 : 1;
     } else {
@@ -64,7 +64,7 @@ const OrderHistoryPage = () => {
     }
   });
 
-  const visibleRows = sortedOrders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+  const visibleRows = orders.length > 0 ? orders : [];
 
   return (
     <Box
@@ -107,18 +107,23 @@ const OrderHistoryPage = () => {
             Order History
           </Typography>
           <OrderSearchBar searchTerm={searchTerm} onSearchChange={handleSearchChange} />
-          <OrderTable
-            rows={visibleRows}
-            orderBy={orderBy}
-            order={order}
-            onRequestSort={handleRequestSort}
-            onOrderDetail={handleOrderDetail}
-            page={page}
-            rowsPerPage={rowsPerPage}
-            totalRows={totalItems}
-            onChangePage={handleChangePage}
-            onChangeRowsPerPage={handleChangeRowsPerPage}
-          />
+          {orders.length > 0 ? (
+            <OrderTable
+              rows={visibleRows}
+              orderBy={orderBy}
+              order={order}
+              onRequestSort={handleRequestSort}
+              onOrderDetail={handleOrderDetail}
+              page={page}
+              rowsPerPage={rowsPerPage}
+              totalRows={totalItems}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+          ) : (
+            <Typography>No orders available</Typography>
+          )}
+
         </Paper>
       </Box>
     </Box>

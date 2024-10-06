@@ -29,7 +29,7 @@ const createApiInstance = (baseURL) => {
       if (error.response) {
         if (error.response.status === 401 || error.response.status === 403) {
           localStorage.removeItem('token');
-          window.location.href = '/login';
+          window.location.href = '/';
         }
       }
       return Promise.reject(error.response ? error.response.data : new Error('API request failed'));
