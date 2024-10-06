@@ -1,2 +1,2 @@
 /*    /index.html   200
-/auth/*  https://restaurant-alegra.online/:splat   200
+/auth/*  https://restaurant-alegra.online/auth/:splat   200
