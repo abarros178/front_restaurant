@@ -6,6 +6,7 @@ import {
   Paper,
   Container,
   Fade,
+  useMediaQuery,
 } from "@mui/material";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import Menu from "../components/Menu";
@@ -16,6 +17,7 @@ const RecipePage = () => {
   const [recipes, setRecipes] = useState([]);
   const [searchTerm] = useState("");
   const theme = useTheme();
+  useMediaQuery(theme.breakpoints.down("sm")); // Para detectar si es una pantalla pequeña
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -60,6 +62,7 @@ const RecipePage = () => {
         minHeight: "100vh",
         backgroundSize: "cover",
         backgroundAttachment: "fixed",
+        flexDirection: { xs: "column", sm: "row" }, // Ajusta la dirección en pantallas pequeñas
       }}
     >
       <Box
@@ -67,13 +70,20 @@ const RecipePage = () => {
         sx={{
           width: { xs: "100%", sm: "250px" },
           flexShrink: 0,
-          borderRight: "1px solid",
-          borderColor: "divider",
+          borderRight: { sm: "1px solid" },
+          borderColor: { sm: "divider" },
         }}
       >
         <Menu />
       </Box>
-      <Box component="main" sx={{ flexGrow: 1, p: 4, overflow: "auto" }}>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          p: 4,
+          overflow: "auto",
+        }}
+      >
         <Container maxWidth="lg">
           <Fade in={true} timeout={1000}>
             <Paper elevation={3} sx={{ p: 4, borderRadius: 2, mb: 4 }}>

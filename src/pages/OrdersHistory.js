@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Paper, Typography } from '@mui/material';
+import { Box, Paper, Typography, useTheme, useMediaQuery } from '@mui/material';
 import OrderSearchBar from '../components/OrderSearchBar';
 import OrderTable from '../components/OrderTable';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,8 @@ import Menu from '../components/Menu';
 import { getOrders } from '../services/orderService';
 
 const OrderHistoryPage = () => {
+  const theme = useTheme();
+  useMediaQuery(theme.breakpoints.down("sm")); // Detectar si es una pantalla pequeña
   const [orders, setOrders] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -65,24 +67,31 @@ const OrderHistoryPage = () => {
   const visibleRows = sortedOrders.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
-    <Box sx={{ display: 'flex', minHeight: '100vh', bgcolor: '#f5f5f5' }}>
-        <Box
-          component="nav"
-          sx={{
-            width: { xs: '100%', sm: '250px' },
-            flexShrink: 0,
-            borderRight: '1px solid',
-            borderColor: 'divider',
-          }}
-        >
-          <Menu />
-        </Box>
+    <Box
+      sx={{
+        display: 'flex',
+        minHeight: '100vh',
+        bgcolor: '#f5f5f5',
+        flexDirection: { xs: 'column', sm: 'row' }, // Cambiar la dirección para pantallas pequeñas
+      }}
+    >
+      <Box
+        component="nav"
+        sx={{
+          width: { xs: '100%', sm: '250px' }, // Ancho total en pantallas pequeñas
+          flexShrink: 0,
+          borderRight: { sm: '1px solid' }, // Sólo mostrar el borde en pantallas grandes
+          borderColor: { sm: 'divider' },
+        }}
+      >
+        <Menu />
+      </Box>
       <Box
         component="main"
         sx={{
           flexGrow: 1,
           p: 3,
-          width: { sm: `calc(100% - ${240}px)` },
+          width: { sm: `calc(100% - 250px)` },
         }}
       >
         <Paper

@@ -7,6 +7,7 @@ import {
   TextField,
   InputAdornment,
   Paper,
+  useMediaQuery,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Menu from "../components/Menu";
@@ -16,6 +17,8 @@ import debounce from "lodash/debounce";
 
 const PurchaseHistory = () => {
   const theme = useTheme();
+  useMediaQuery(theme.breakpoints.down("sm")); // Para detectar si es una pantalla pequeña
+
   const [purchases, setPurchases] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -38,7 +41,6 @@ const PurchaseHistory = () => {
       setTotalRows(response.totalItems);
     } catch (error) {
       console.error("Error fetching purchase history:", error);
-      // Mostrar un mensaje de error al usuario
     }
   }, [page, rowsPerPage, orderBy, order, searchTerm]);
 
@@ -90,6 +92,7 @@ const PurchaseHistory = () => {
         display: "flex",
         minHeight: "100vh",
         bgcolor: theme.palette.background.default,
+        flexDirection: { xs: "column", sm: "row" }, // Cambia la dirección en pantallas pequeñas
       }}
     >
       <Box
@@ -97,15 +100,19 @@ const PurchaseHistory = () => {
         sx={{
           width: { xs: "100%", sm: "250px" },
           flexShrink: 0,
-          borderRight: "1px solid",
-          borderColor: "divider",
+          borderRight: { sm: "1px solid" },
+          borderColor: { sm: "divider" },
         }}
       >
         <Menu />
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, width: { sm: `calc(100% - 250px)` } }}
+        sx={{
+          flexGrow: 1,
+          p: 3,
+          width: { sm: `calc(100% - 250px)` },
+        }}
       >
         <Paper elevation={3} sx={{ p: 3, borderRadius: 2 }}>
           <Typography
