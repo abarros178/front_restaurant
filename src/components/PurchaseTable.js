@@ -53,7 +53,7 @@ const PurchaseTable = ({
         component={Box}
         sx={{
           borderRadius: "16px",
-          overflow: "hidden",
+          overflowX: "auto", // Agregamos overflowX para permitir desplazamiento horizontal en móviles
           boxShadow: theme.shadows[1],
         }}
       >
