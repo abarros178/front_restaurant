@@ -1,10 +1,8 @@
-export const API_BASE_URL_KITCHEN = 'http://35.226.163.33/kitchen/api';
-export const API_BASE_URL_MARKET = 'http://35.226.163.33/marketplace/api';
-export const SOCKET_URL = 'http://35.226.163.33/order-socket';
+export const API_BASE_URL_KITCHEN = 'https://restaurant-alegra.online/kitchen/api';
+export const API_BASE_URL_MARKET = 'https://restaurant-alegra.online/marketplace/api';
+export const SOCKET_URL = 'https://restaurant-alegra.online/order-socket';
 export const SOCKET_PATH = '/order-socket/socket.io';
-export const API_BASE_URL_ORDER = 'http://35.226.163.33/order/api';
-export const API_BASE_URL_MANAGER = 'http://35.226.163.33/manager/api';
-export const API_BASE_URL_INGREDI = 'http://35.226.163.33/ingredients/api';
-export const API_BASE_URL_AUTH = 'http://35.226.163.33/auth/api';
-
-
+export const API_BASE_URL_ORDER = 'https://restaurant-alegra.online/order/api';
+export const API_BASE_URL_MANAGER = 'https://restaurant-alegra.online/manager/api';
+export const API_BASE_URL_INGREDI = 'https://restaurant-alegra.online/ingredients/api';
+export const API_BASE_URL_AUTH = 'https://restaurant-alegra.online/auth/api';
