@@ -1,3 +1,10 @@
+## Credenciales de inicio de sesión
+
+Puedes iniciar sesión con las siguientes credenciales:
+
+- **Email:** gerente@gerente.com
+- **Contraseña:** password123
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
